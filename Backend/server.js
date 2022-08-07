@@ -4,7 +4,9 @@ const cors =require("cors");
 const app = express();
 const bodyParser=require("body-parser");
 const ConnectDB =require("./config/db");
+const {notFound,errorHandler}=require("./middleware/errorMiddleware");
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 ConnectDB();
 
@@ -18,4 +20,6 @@ app.listen(5000,function(){
         )
     })
     
-    app.use("/api",productsRouter);
+    app.use("/api/products",productsRouter);
+    app.use(notFound);
+    app.use(errorHandler);

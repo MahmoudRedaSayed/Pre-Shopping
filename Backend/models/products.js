@@ -45,6 +45,11 @@ const productSchema=mongoose.Schema({
         type:Number,
         required:true,
         default:0
+    },
+    price:{
+        type:Number,
+        required:true,
+        default:0.0
     }
 },{
     timestamps:true
