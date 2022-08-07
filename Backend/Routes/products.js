@@ -1,5 +1,5 @@
-const express = require("express");
-const products =require("../products");
+const   express =require("express");
+const   products =require("../products");
 const router= express.Router();
 
 router.get("/products",function(req,res){
@@ -17,4 +17,4 @@ router.get("/products/:id",function(req,res){
 })
 
 
-module.exports=router;
+module.exports= router;

@@ -1,9 +1,12 @@
-const express =require("express");
+const  express =require("express");
+const   productsRouter =require("./Routes/products");
 const cors =require("cors");
 const app = express();
 const bodyParser=require("body-parser");
+const ConnectDB =require("./config/db");
 app.use(bodyParser.urlencoded({ extended: true }));
-const productsRouter=require("./Routes/products");
+
+ConnectDB();
 
 
 
