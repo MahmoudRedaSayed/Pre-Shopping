@@ -10,9 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 ConnectDB();
 
-
-
-
 app.use(cors());
 app.listen(5000,function(){
     console.log(
