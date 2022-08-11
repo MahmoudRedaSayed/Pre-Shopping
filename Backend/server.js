@@ -1,5 +1,6 @@
 const  express =require("express");
 const   productsRouter =require("./Routes/products");
+const   usersRouter =require("./Routes/users");
 const cors =require("cors");
 const app = express();
 const bodyParser=require("body-parser");
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 ConnectDB();
 
+
 app.use(cors());
 app.listen(5000,function(){
     console.log(
@@ -18,5 +20,6 @@ app.listen(5000,function(){
     })
     
     app.use("/api/products",productsRouter);
+    app.use("/api/users",usersRouter);
     app.use(notFound);
     app.use(errorHandler);
