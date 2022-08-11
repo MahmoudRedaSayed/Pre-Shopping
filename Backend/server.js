@@ -13,6 +13,7 @@ ConnectDB();
 
 
 app.use(cors());
+app.use(express.json());
 app.listen(5000,function(){
     console.log(
         "the server is running on the port 5000"
