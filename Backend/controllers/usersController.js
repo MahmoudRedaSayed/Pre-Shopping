@@ -24,6 +24,8 @@ const auth=asyncHandler(async(req,res)=>{
     catch(error)
     {
         console.log(error.message);
+        res.status(401);
+        res.json({error:"error in data"});
     }
 })
 
