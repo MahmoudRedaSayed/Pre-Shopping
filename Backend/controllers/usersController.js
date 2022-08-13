@@ -58,8 +58,9 @@ const userRegisteration=asyncHandler(async(req,res)=>{
     try{
         const{name,email,password}=req.body;
         const userExist=User.findOne({email});
-        if(userExist)
+        if(userExist===undefined)
         {
+            console.log(userExist.name)
             res.status(400);
             throw new Error("user Exist");
         }
@@ -85,6 +86,8 @@ const userRegisteration=asyncHandler(async(req,res)=>{
     catch(error)
     {
         console.log(error.message);
+        res.status(401);
+        res.json({error:"invalid data"})
     }
 })
 
