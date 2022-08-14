@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const {auth,getUserProfile,userRegisteration}=require("../controllers/usersController");
+const {auth,getUserProfile,updateUserProfile,userRegisteration}=require("../controllers/usersController");
 const {protect,admin}=require("../middleware/authMiddleware")
 
 //@desc auth user
@@ -16,6 +16,6 @@ router.route("/").post(userRegisteration);
 //@desc get user profile
 //@access private
 //@route /api/users/profile
-router.route("/profile").get(protect,getUserProfile);
+router.route("/profile").get(protect,getUserProfile).put(protect,updateUserProfile);
 
 module.exports= router;

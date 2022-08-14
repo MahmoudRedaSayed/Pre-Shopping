@@ -37,7 +37,15 @@ const getUserProfile=asyncHandler(async(req,res)=>{
         const user=await users.findById(req.user._id);
         if(user&&await(user.matchPassword(password))) 
         {
-            res.json({...user,token:generateToken(user.id)});
+            if (user) {
+                res.json({
+                  _id: user._id,
+                  name: user.name,
+                  email: user.email,
+                  isAdmin: user.isAdmin,
+                  token:generateToken(user._id)
+                })
+            }
         }
         else
         {
@@ -48,8 +56,41 @@ const getUserProfile=asyncHandler(async(req,res)=>{
     catch(error)
     {
         console.log(error.message);
+        res.status(401);
+        throw Error("Invalid email or password");
     }
+
 })
+
+
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id)
+    console.log("called")
+    if (user) {
+      user.name = req.body.name || user.name
+      user.email = req.body.email || user.email
+      if (req.body.password) {
+        user.password = req.body.password
+      }
+  
+      const updatedUser = await user.save()
+  
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+        token: generateToken(updatedUser._id),
+      })
+    } else {
+      res.status(404)
+      throw new Error('User not found')
+    }
+  })
+
 
 //@desc register user
 //@access public
@@ -72,15 +113,20 @@ const userRegisteration=asyncHandler(async(req,res)=>{
         if(user)
         {
             res.status(201);
-            res.json({
-                ...user,
+            if (user) {
+                res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
                 token:generateToken(user._id)
-            })
+                })
         }
         else
         {
             res.status(400);
             throw new Error("data invalid");
+        }
         }
     }
     catch(error)
@@ -92,4 +138,4 @@ const userRegisteration=asyncHandler(async(req,res)=>{
 })
 
 
-module.exports={auth,getUserProfile,userRegisteration};
+module.exports={auth,getUserProfile,userRegisteration,updateUserProfile};
