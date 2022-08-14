@@ -13,7 +13,11 @@ const auth=asyncHandler(async(req,res)=>{
         const user=await users.findOne({email});
         if(user&&await(user.matchPassword(password))) 
         {
-            res.json({...user,token:generateToken(user._id)});
+            res.json({ _id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        isAdmin: user.isAdmin,
+                        token:generateToken(user._id)});
         }
         else
         {
@@ -35,7 +39,7 @@ const auth=asyncHandler(async(req,res)=>{
 const getUserProfile=asyncHandler(async(req,res)=>{
     try{
         const user=await users.findById(req.user._id);
-        if(user&&await(user.matchPassword(password))) 
+        if(user) 
         {
             if (user) {
                 res.json({
@@ -68,14 +72,12 @@ const getUserProfile=asyncHandler(async(req,res)=>{
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
-    console.log("called")
     if (user) {
       user.name = req.body.name || user.name
       user.email = req.body.email || user.email
       if (req.body.password) {
         user.password = req.body.password
       }
-  
       const updatedUser = await user.save()
   
       res.json({
