@@ -113,7 +113,7 @@ export const payOrder = (orderId, paymentResult) => async (
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -124,7 +124,7 @@ export const payOrder = (orderId, paymentResult) => async (
     }
 
     const { data } = await axios.put(
-      `/api/orders/${orderId}/pay`,
+      `http://localhost:5000/api/orders/${orderId}/pay`,
       paymentResult,
       config
     )
