@@ -29,7 +29,8 @@ export const createOrder = (order) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
+
     } = getState()
 
     const config = {
@@ -39,7 +40,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/api/orders`, order, config)
+    const { data } = await axios.post(`http://localhost:5000/api/orders`, order, config)
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,

@@ -31,15 +31,11 @@ const OrderSchema=mongoose.Schema({
         }
     }
     ],
-    shoppingAddress:{
+    shippingAddress:{
         city:{type:String,required:true},
         postalCode:{type:String,required:true},
         address:{type:String,required:true},
         country:{type:String,required:true}
-    },
-    paymentMethod:{
-        type:String,
-        required:true,
     },
     paymentMethod:{
         type:String,
@@ -62,7 +58,7 @@ const OrderSchema=mongoose.Schema({
         required:true,
         default:0.0
     },
-    shoppingPrice:{
+    shippingPrice:{
         type:Number,
         required:true,
         default:0.0

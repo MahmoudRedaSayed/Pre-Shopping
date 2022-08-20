@@ -1,6 +1,7 @@
 const  express =require("express");
 const   productsRouter =require("./Routes/products");
 const   usersRouter =require("./Routes/users");
+const   ordersRouter =require("./Routes/order");
 const cors =require("cors");
 const app = express();
 const bodyParser=require("body-parser");
@@ -22,5 +23,6 @@ app.listen(5000,function(){
     
     app.use("/api/products",productsRouter);
     app.use("/api/users",usersRouter);
+    app.use("/api/orders",ordersRouter);
     app.use(notFound);
     app.use(errorHandler);
