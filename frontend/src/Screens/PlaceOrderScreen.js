@@ -41,6 +41,7 @@ const PlaceOrderScreen = () => {
   useEffect(() => {
     console.log(cart.paymentMethod)
     if (success) {
+        console.log(order)
       navigate(`/order/${order._id}`)
     //   dispatch({ type: USER_DETAILS_RESET })
     //   dispatch({ type: ORDER_CREATE_RESET })

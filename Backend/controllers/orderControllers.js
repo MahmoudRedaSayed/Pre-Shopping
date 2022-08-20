@@ -1,6 +1,21 @@
 const asyncHandler =require( "express-async-handler");
 const Orders=require("../models/order");
 
+const getOrderById = asyncHandler(async (req, res) => {
+    const order = await Orders.findById(req.params.id).populate(
+      'user',
+      'name email'
+    )
+  
+    if (order) {
+      res.json(order)
+    } else {
+      res.status(404)
+      throw new Error('Order not found')
+    }
+  })
+
+
 const createOrder=asyncHandler(async function(req,res){
     try{
         const {orderItems,
@@ -22,7 +37,7 @@ const createOrder=asyncHandler(async function(req,res){
         {
             console.log(paymentMethod)
             const order=new Orders({
-                orderItems,
+                orderedItem:orderItems,
                 user:req.user._id,
             shippingAddress,
             paymentMethod,
@@ -32,7 +47,9 @@ const createOrder=asyncHandler(async function(req,res){
             totalPrice
             })
             const createdOrder=await order.save();
-            res.status(201).json(createOrder)
+            res.status(201);
+            console.log(createdOrder)
+            res.json(createdOrder);
         }
     }
     catch(error)
@@ -43,4 +60,4 @@ const createOrder=asyncHandler(async function(req,res){
     }
 });
 
-module.exports={createOrder};
+module.exports={createOrder,getOrderById};
