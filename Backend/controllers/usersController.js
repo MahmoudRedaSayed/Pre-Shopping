@@ -16,7 +16,7 @@ const auth=asyncHandler(async(req,res)=>{
             res.json({ _id: user._id,
                         name: user.name,
                         email: user.email,
-                        isAdmin: user.isAdmin,
+                        isAdmin: user.Admin,
                         token:generateToken(user._id)});
         }
         else
@@ -139,5 +139,21 @@ const userRegisteration=asyncHandler(async(req,res)=>{
     }
 })
 
+const getUsers=asyncHandler(async(req,res)=>{
+    const users=await User.find({});
+    res.json(users);
+})
 
-module.exports={auth,getUserProfile,userRegisteration,updateUserProfile};
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+  
+    if (user) {
+      await user.remove()
+      res.json({ message: 'User removed' })
+    } else {
+      res.status(404)
+      throw new Error('User not found')
+    }
+  })
+
+module.exports={auth,getUserProfile,userRegisteration,updateUserProfile,getUsers,deleteUser};

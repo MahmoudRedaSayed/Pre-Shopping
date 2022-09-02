@@ -155,7 +155,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -191,12 +191,13 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
 
 export const listMyOrders = () => async (dispatch, getState) => {
   try {
+    console.log("inside function")
     dispatch({
       type: ORDER_LIST_MY_REQUEST,
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -205,7 +206,8 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/orders/myorders`, config)
+    const { data } = await axios.get(`http://localhost:5000/api/orders/myorders`, config)
+    // console.log(data);
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -216,6 +218,8 @@ export const listMyOrders = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
+
+    console.log(error)
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
@@ -242,7 +246,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/orders`, config)
+    const { data } = await axios.get(`http://localhost:5000/api/orders`, config)
 
     dispatch({
       type: ORDER_LIST_SUCCESS,

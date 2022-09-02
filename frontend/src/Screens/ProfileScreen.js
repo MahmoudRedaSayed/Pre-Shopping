@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+import {ORDER_LIST_MY_RESET} from "../constants/orderConstants"
 
 const ProfileScreen = () => {
   const location=useLocation();
@@ -34,12 +35,13 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     if (!userInfo) {
-      navigate('/login');
+      navigate('/signin');
     } else {
-      if (!user || !user.name || success) {
+      dispatch(listMyOrders());
+      if (!userInfo.name) {
+        console.log("profile");
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
-        dispatch(listMyOrders())
       } else {
         setName(user.name)
         setEmail(user.email)
@@ -134,8 +136,9 @@ const ProfileScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
+              {orders.length!==0&&orders.map((order) =>{
+                console.log(orders.length)
+                return(<tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>{order.totalPrice}</td>
@@ -161,7 +164,7 @@ const ProfileScreen = () => {
                     </LinkContainer>
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </Table>
         )}

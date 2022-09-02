@@ -14,6 +14,11 @@ const getOrderById = asyncHandler(async (req, res) => {
       throw new Error('Order not found')
     }
   })
+  const getMyOrders = asyncHandler(async (req, res) => {
+    const orders = await Orders.find({ user: req.user._id })
+    res.json(orders)
+  })
+  
 
   const updateOrderToPaied = asyncHandler(async (req, res) => {
     const order = await Orders.findById(req.params.id);
@@ -57,7 +62,6 @@ const createOrder=asyncHandler(async function(req,res){
         }
         else
         {
-            console.log(paymentMethod)
             const order=new Orders({
                 orderedItem:orderItems,
                 user:req.user._id,
@@ -70,7 +74,6 @@ const createOrder=asyncHandler(async function(req,res){
             })
             const createdOrder=await order.save();
             res.status(201);
-            console.log(createdOrder)
             res.json(createdOrder);
         }
     }
@@ -82,4 +85,4 @@ const createOrder=asyncHandler(async function(req,res){
     }
 });
 
-module.exports={createOrder,getOrderById,updateOrderToPaied};
+module.exports={createOrder,getOrderById,updateOrderToPaied,getMyOrders};

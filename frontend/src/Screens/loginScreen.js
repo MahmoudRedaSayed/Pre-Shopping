@@ -37,7 +37,11 @@ export default function LoginScreen(){
 
         if(userInfo)
         {
-            navigate("/");
+            const redirect = location.search ? location.search.split('=')[1] : '/'
+            if(redirect!="/")
+            navigate(`/${redirect}`);
+            else
+            navigate("/")
         }
     }
     ,[userInfo])

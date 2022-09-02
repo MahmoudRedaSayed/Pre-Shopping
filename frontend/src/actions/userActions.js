@@ -49,7 +49,7 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     })
-
+      console.log(data);
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
@@ -201,7 +201,7 @@ export const listUsers = () => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -238,7 +238,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
