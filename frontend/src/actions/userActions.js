@@ -272,7 +272,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {

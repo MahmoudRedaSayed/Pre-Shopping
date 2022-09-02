@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const {auth,getUserProfile,updateUserProfile,userRegisteration,getUsers,deleteUser}=require("../controllers/usersController");
+const {auth,getUserProfile,updateUserProfile,userRegisteration,getUsers,deleteUser,getUserById,updateUser}=require("../controllers/usersController");
 const {protect,admin}=require("../middleware/authMiddleware")
 
 //@desc auth user
@@ -14,7 +14,11 @@ router.route("/login").post(auth);
 router.route("/").post(userRegisteration).get(protect,admin,getUsers);
 
 
-router.route('/:id').delete(protect, admin, deleteUser)
+router
+  .route('/:id')
+  .delete(protect, admin, deleteUser)
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUser)
 
 //@desc get user profile
 //@access private
