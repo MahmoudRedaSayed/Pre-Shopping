@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import {Container} from "react-bootstrap";
 import {Route,Routes,BrowserRouter as Router} from "react-router-dom";
-import Home from "./Screens/Home";
+import HomeScreen from "./Screens/Home";
 import ProductScreen from "./Screens/ProductScreen";
 import CartScreen from "./Screens/CartScreen";
 import LoginScreen from "./Screens/loginScreen";
@@ -15,6 +15,9 @@ import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import OrderScreen from "./Screens/OrderScreen";
 import UsersListScreen from "./Screens/UsersListScreen";
 import UserEditScreen from "./Screens/UserEditScreen";
+import ProductListScreen from "./Screens/ProductListScreen";
+import ProductEditScreen from "./Screens/ProductEditScreen";
+import OrderListScreen from "./Screens/OrderListScreen";
 
 
 function App() {
@@ -23,7 +26,8 @@ function App() {
     <Header></Header>
     <Container>
       <Routes>
-        <Route path="/" element={<Home></Home>} exact></Route>
+       
+        <Route path='/' element={<HomeScreen/>} exact />
         <Route path="/signin"   element={<LoginScreen></LoginScreen>}  exact></Route>
         <Route path="/register"   element={<RegisterScreen></RegisterScreen>}  exact></Route>
         <Route path="/profile"   element={<ProfileScreen></ProfileScreen>}  exact></Route>
@@ -34,8 +38,15 @@ function App() {
         <Route path="/placeorder"  element={<PlaceOrderScreen></PlaceOrderScreen>} exact />
         <Route path="/order/:id"  element={<OrderScreen></OrderScreen>} exact />
         <Route path="/Admin/userlist"  element={<UsersListScreen></UsersListScreen>} exact />
+        <Route path="/Admin/Productlist"  element={<ProductListScreen></ProductListScreen>} exact />
         <Route path="/admin/user/:id/edit"  element={<UserEditScreen></UserEditScreen>} exact />
-
+        <Route path="/admin/product/:id/edit"  element={<ProductEditScreen></ProductEditScreen>} exact />
+        <Route path='/admin/orderlist' element={<OrderListScreen></OrderListScreen>} exact />
+        <Route
+            path='/search/:keyword'
+            element={<HomeScreen/>}
+            exact
+          />
       </Routes>
     </Container>
     <Footer></Footer>

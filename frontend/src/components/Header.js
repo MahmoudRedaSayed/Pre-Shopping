@@ -1,5 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link,Route,Routes} from "react-router-dom";
+import SearchBox from "./SearchBox";
 import { LinkContainer } from 'react-router-bootstrap'
 import {Container,Navbar,Nav,Row, NavDropdown} from "react-bootstrap";
 import { useDispatch,useSelector } from "react-redux";
@@ -19,6 +20,10 @@ export default function Header(){
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav  className="ml-auto" style={{"flexGrow":0}}>
+              {/* <Routes>
+            <Route render={({ history }) => <SearchBox history={history} />} />
+            </Routes> */}
+            <SearchBox />
             <Nav.Link href="/cart">
                 <Nav.Item>
                     <i className="fas fa-shopping-cart"></i>Cart

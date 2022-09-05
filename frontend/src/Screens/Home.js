@@ -6,14 +6,16 @@ import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 export default function HomeScreen(){
+    const params=useParams();
     const dispatch = useDispatch();
-
+    const keyword = params.keyword
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
 
     useEffect(() => {
-        dispatch(listProducts());
+        dispatch(listProducts(keyword));
     }, [dispatch]);
 
     return(<>
@@ -25,11 +27,12 @@ export default function HomeScreen(){
       ) : (
     <Row>
             {
-                products.map(product=>(
+                products.data&&products.data.map(product=>(
                     <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                         <Product Product={product}></Product>
                     </Col>
                 ))
+                // console.log(products.data)
             }
     </Row>
       )}

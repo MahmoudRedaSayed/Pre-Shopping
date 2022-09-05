@@ -54,6 +54,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
     const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+    console.log(data,"from the actions");
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -77,7 +78,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -113,7 +114,7 @@ export const createProduct = () => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -150,7 +151,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {
@@ -161,7 +162,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `/api/products/${product._id}`,
+      `http://localhost:5000/api/products/${product._id}`,
       product,
       config
     )
@@ -196,7 +197,7 @@ export const createProductReview = (productId, review) => async (
     })
 
     const {
-      userLogin: { userInfo },
+      userLoginReducer: { userInfo },
     } = getState()
 
     const config = {

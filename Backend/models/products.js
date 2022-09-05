@@ -3,7 +3,12 @@ const mongoose =require("mongoose");
 const review=mongoose.Schema({
     name:{type:String,required:true},
     rating:{type:Number,required:true},
-    comment:{type:String,required:true}
+    comment:{type:String,required:true},
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+      },
 })
 const productSchema=mongoose.Schema({
     user:{
@@ -50,7 +55,8 @@ const productSchema=mongoose.Schema({
         type:Number,
         required:true,
         default:0.0
-    }
+    },
+    reviews: [review],
 },{
     timestamps:true
 })
