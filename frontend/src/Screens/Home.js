@@ -7,15 +7,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Paginate from '../components/Paginate';
 export default function HomeScreen(){
     const params=useParams();
     const dispatch = useDispatch();
-    const keyword = params.keyword
+    const keyword = params.keyword;
+    const pageNumber = params.pageNumber || 1
     const productList = useSelector((state) => state.productList);
     const { loading, error, products } = productList;
 
     useEffect(() => {
-        dispatch(listProducts(keyword));
+        dispatch(listProducts(keyword,pageNumber));
     }, [dispatch]);
 
     return(<>
@@ -25,6 +27,7 @@ export default function HomeScreen(){
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
+        <>
     <Row>
             {
                 products.data&&products.data.map(product=>(
@@ -32,9 +35,15 @@ export default function HomeScreen(){
                         <Product Product={product}></Product>
                     </Col>
                 ))
-                // console.log(products.data)
+                
             }
     </Row>
+     <Paginate
+     pages={products.pages}
+     page={products.page}
+     keyword={keyword ? keyword : ''}
+   />
+   </>
       )}
     
     
