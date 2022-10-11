@@ -151,5 +151,19 @@ const deleteProduct = asyncHandler(async (req, res) => {
       throw new Error('Product not found')
     }
   })
+  const getTopProducts = asyncHandler(async (req, res) => {
+    const products = await Products.find({}).sort({ rating: -1 }).limit(3)
+    console.log("heer")
+  
+    res.json(products)
+  })
+  
+  
 
-module.exports= {getProducts ,getProductById,createProduct,deleteProduct,updateProduct, createProductReview};
+module.exports= {getProducts 
+                ,getProductById
+                ,createProduct
+                ,deleteProduct
+                ,updateProduct
+                , createProductReview
+                ,getTopProducts};

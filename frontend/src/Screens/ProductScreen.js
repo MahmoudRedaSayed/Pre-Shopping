@@ -205,7 +205,7 @@ export default function ProductScreen(){
               </Form>
             ) : (
               <Message>
-                Please <Link to='/login'>sign in</Link> to write a review{' '}
+                Please <Link to='/signin'>sign in</Link> to write a review{' '}
               </Message>
             )}
           </ListGroup.Item>

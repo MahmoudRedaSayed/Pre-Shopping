@@ -212,6 +212,9 @@ export const createProductReview = (productId, review) => async (
     dispatch({
       type: PRODUCT_CREATE_REVIEW_SUCCESS,
     })
+
+    dispatch(listProductDetails(productId));
+
   } catch (error) {
     const message =
       error.response && error.response.data.message

@@ -94,9 +94,9 @@ export default function RegisterScreen  () {
       <Row className='py-3'>
         <Col>
           Have an Account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          <a href={"signin"}>
             Login
-          </Link>
+          </a>
         </Col>
       </Row>
       </Col>

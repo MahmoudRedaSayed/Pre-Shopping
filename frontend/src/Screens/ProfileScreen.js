@@ -42,10 +42,18 @@ const ProfileScreen = () => {
         console.log("profile");
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
-      } else {
-        setName(user.name)
+      } 
+    }
+  }, [dispatch, navigate, userInfo, user, success])
+  useEffect(()=>{
+    if(user)
+    {
+      setName(user.name)
         setEmail(user.email)
-      }
+    }
+    else
+    {
+      dispatch(getUserDetails('profile'))
     }
   }, [dispatch, navigate, userInfo, user, success])
 

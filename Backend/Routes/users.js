@@ -14,15 +14,12 @@ router.route("/login").post(auth);
 router.route("/").post(userRegisteration).get(protect,admin,getUsers);
 
 
+router.route("/profile").get(protect,getUserProfile).put(protect,updateUserProfile);
 router
   .route('/:id')
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser)
 
-//@desc get user profile
-//@access private
-//@route /api/users/profile
-router.route("/profile").get(protect,getUserProfile).put(protect,updateUserProfile);
 
 module.exports= router;

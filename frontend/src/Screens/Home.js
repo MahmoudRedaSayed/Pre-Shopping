@@ -5,9 +5,9 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
 export default function HomeScreen(){
     const params=useParams();
     const dispatch = useDispatch();
@@ -22,6 +22,13 @@ export default function HomeScreen(){
 
     return(<>
     <h1 className="text-center mt-4">the letest Products</h1>
+    {!keyword ? (
+        <ProductCarousel />
+      ): (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
     {loading ? (
         <Loader />
       ) : error ? (
