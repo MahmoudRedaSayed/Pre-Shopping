@@ -21,8 +21,6 @@ a basic E-commerce to buy electronic devices
 - React-bootstrap
 - mongodb
 
-## ScreenShots
-- Calling Dialog Box
-![Project Demo]
-<video src="./videos/Demo.mkv.png" autoplay muted></video>
+## video demo
+![](https://github.com/MahmoudRedaSayed/Pre-Shopping/blob/main/videos/Demo.gif)
 
